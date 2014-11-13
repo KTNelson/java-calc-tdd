@@ -16,6 +16,15 @@ public class EquationStep {
 	private eOperator operator;
 	private BigDecimal result;
 	
+	public EquationStep(){
+		
+	}
+	
+	public EquationStep(BigDecimal leftHandSide, eOperator op, BigDecimal rightHandSide){
+		lhs = leftHandSide;
+		rhs = rightHandSide;
+		operator = op;
+	}
 	
 	public void setLeftHandValue(BigDecimal leftHandSide) {
 		lhs = leftHandSide;
