@@ -4,10 +4,6 @@ import java.math.BigDecimal;
 
 public class EquationStep {
 	
-	private BigDecimal lhs;
-	private BigDecimal rhs;
-	private eOperator operator;
-	
 	public enum eOperator{
 		eOperator_Plus,
 		eOperator_Subtract,
@@ -15,9 +11,11 @@ public class EquationStep {
 		eOperator_Divide
 	}
 	
-	public EquationStep() {
-		
-	}
+	private BigDecimal lhs;
+	private BigDecimal rhs;
+	private eOperator operator;
+	private BigDecimal result;
+	
 	
 	public void setLeftHandValue(BigDecimal leftHandSide) {
 		lhs = leftHandSide;
@@ -38,5 +36,22 @@ public class EquationStep {
 	}
 	public eOperator getOperator(){
 		return operator;
+	}
+	
+	public void execute(){
+		switch(operator)
+		{
+		case eOperator_Plus: result = lhs.add(rhs);
+			break;
+		case eOperator_Subtract: result = lhs.subtract(rhs);
+			break;
+		case eOperator_Divide: result = lhs.divide(rhs);
+			break;
+		case eOperator_Multiply: result = lhs.multiply(rhs);
+		}
+	}
+	
+	public BigDecimal getResult(){
+		return result;
 	}
 }
