@@ -6,6 +6,14 @@ public class EquationStep {
 	
 	private BigDecimal lhs;
 	private BigDecimal rhs;
+	private eOperator operator;
+	
+	public enum eOperator{
+		eOperator_Plus,
+		eOperator_Subtract,
+		eOperator_Multiply,
+		eOperator_Divide
+	}
 	
 	public EquationStep() {
 		
@@ -23,5 +31,12 @@ public class EquationStep {
 	}
 	public BigDecimal getRightHandValue() {
 		return rhs;
+	}
+	
+	public void setOperator(eOperator op){
+		operator = op;
+	}
+	public eOperator getOperator(){
+		return operator;
 	}
 }

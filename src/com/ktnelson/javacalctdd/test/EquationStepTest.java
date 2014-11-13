@@ -37,4 +37,15 @@ public class EquationStepTest {
 		System.out.println("valuesShouldSetCorrectly complete");
 
 	}
+	
+	@Test
+	public void operatorShouldSetCorrectly(){
+		EquationStep stepTest = new EquationStep();
+		
+		stepTest.setOperator(EquationStep.eOperator.eOperator_Plus);
+		
+		assertEquals("Operator should equal eOperator_Plus", EquationStep.eOperator.eOperator_Plus, stepTest.getOperator());
+		
+		System.out.println("operatorShouldSetCorrectly");
+	}
 }
