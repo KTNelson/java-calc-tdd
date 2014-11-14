@@ -16,4 +16,8 @@ public class EqNumber {
 	public BigDecimal getValue(){
 		return value;
 	}
+	
+	public void setValue(BigDecimal inVal){
+		value = inVal;
+	}
 }

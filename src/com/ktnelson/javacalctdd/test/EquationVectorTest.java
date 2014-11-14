@@ -35,7 +35,7 @@ public class EquationVectorTest {
 				EquationStep.eOperator.eOperator_Multiply,
 				eqVector.getEquationResultAt(0)));
 		
-		assertEquals("Equations result should be 50", new EqNumber("50").getValue(), eqVector.equate());
+		assertEquals("Equations result should be 50", new EqNumber("50").getValue(), eqVector.equate().getValue());
 		
 	}
 

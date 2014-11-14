@@ -26,6 +26,7 @@ public class EquationStep {
 		lhs = leftHandSide;
 		rhs = rightHandSide;
 		operator = op;
+		result = new EqNumber("0");
 	}
 	
 	public void setLeftHandValue(EqNumber leftHandSide) {
@@ -55,17 +56,21 @@ public class EquationStep {
 	public void execute(){
 		switch(operator)
 		{
-		case eOperator_Plus: result = new EqNumber(lhs.getValue().add(rhs.getValue()));
+		case eOperator_Plus: this.setResult(lhs.getValue().add(rhs.getValue()));
 			break;
-		case eOperator_Subtract: result = new EqNumber(lhs.getValue().subtract(rhs.getValue()));
+		case eOperator_Subtract: this.setResult(lhs.getValue().subtract(rhs.getValue()));
 			break;
-		case eOperator_Divide: result = new EqNumber(lhs.getValue().divide(rhs.getValue()));
+		case eOperator_Divide: this.setResult(lhs.getValue().divide(rhs.getValue()));
 			break;
-		case eOperator_Multiply: result = new EqNumber(lhs.getValue().multiply(rhs.getValue()));
+		case eOperator_Multiply: this.setResult(lhs.getValue().multiply(rhs.getValue()));
 		}
 	}
 	
 	public EqNumber getResult(){
 		return result;
+	}
+	
+	public void setResult(BigDecimal inNum){
+		result.setValue(inNum);
 	}
 }
