@@ -20,6 +20,7 @@ public class EquationStep {
 		lhs = new EqNumber("0");
 		rhs = new EqNumber("0");
 		result = new EqNumber("0");
+		operator = null;
 	}
 	
 	public EquationStep(EqNumber leftHandSide, eOperator op, EqNumber rightHandSide){
@@ -33,26 +34,14 @@ public class EquationStep {
 		lhs = leftHandSide;
 	}
 
-	public EqNumber getLeftHandValue() {
-		return lhs;
-	}
-
-	
 	public void setRightHandValue(EqNumber rightHandSide){
 		rhs = rightHandSide;
-	}
-
-	public EqNumber getRightHandValue() {
-		return rhs;
 	}
 
 	public void setOperator(eOperator op){
 		operator = op;
 	}
-	public eOperator getOperator(){
-		return operator;
-	}
-	
+
 	public void execute(){
 		switch(operator)
 		{

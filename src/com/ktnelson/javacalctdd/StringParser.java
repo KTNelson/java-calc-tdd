@@ -83,7 +83,7 @@ public class StringParser {
 		removeStringSection(m_input, m_input.indexOf(input), input.length());
 		return new EquationStep(lhs, op, rhs);
 	}
-	
+		
 	private boolean isNum(char c){
 		if(!isSpace(c) && !isOperator(c) && !isOpeningBracket(c) && !isClosingBracket(c) && !isEquationReference(c)){
 			return true;

@@ -34,12 +34,9 @@ public class CalcApplication {
 					System.out.println("Result: " + eqVec.equate().getValue());
 				}
 				
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			
 		}
 		
 		
