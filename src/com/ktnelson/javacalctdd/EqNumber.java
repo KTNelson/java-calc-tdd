@@ -7,6 +7,7 @@ public class EqNumber {
 	
 	public EqNumber(BigDecimal inVal){
 		value = inVal;
+		value = value.setScale(3);
 	}
 	
 	public EqNumber(String inVal){
