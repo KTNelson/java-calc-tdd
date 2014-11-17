@@ -40,13 +40,20 @@ public class StringParser {
 			}else {
 				if(isOperator(toCheck))
 				{
-					lhs = new EqNumber(potentialLhs);
+					if(lhs == null){
+						lhs = new EqNumber(potentialLhs);
+					}
 					op = setOperator(toCheck);
 					rhsStart = i+1;
 					break;
 				}
 				else if(isOpeningBracket(toCheck)){
 					continue;
+				}
+				else if(isEquationReference(toCheck)){
+					String refString = String.valueOf(input.charAt(i+1));
+					lhs = eqVec.getEquationResultAt(Integer.valueOf(refString));
+					i++;
 				}
 			}
 		}
@@ -64,7 +71,9 @@ public class StringParser {
 				break;
 			}
 			else if(isEquationReference(toCheck)){
-				rhs = eqVec.getEquationResultAt(eqVec.getSize() - 1);
+				String refString = String.valueOf(input.charAt(i+1));
+				rhs = eqVec.getEquationResultAt(Integer.valueOf(refString));
+				break;
 			}
 		}
 		if(rhs == null){
@@ -139,6 +148,11 @@ public class StringParser {
 	}
 	
 	private void removeStringSection(String inputCopy, int startPos, int length){
-		m_input = inputCopy.substring(0, startPos) + "!" + Integer.toString(eqVec.getSize()) +inputCopy.substring(startPos + length);
+		int closingBracketIndex = inputCopy.indexOf(')') + 1;
+		String firstPart = inputCopy.substring(0, startPos);
+		String ref = "!" + Integer.toString(eqVec.getSize());
+		String endPart = inputCopy.substring(closingBracketIndex);
+		
+		m_input = firstPart + ref + endPart;
 	}
 }

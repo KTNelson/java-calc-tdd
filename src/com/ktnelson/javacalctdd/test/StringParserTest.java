@@ -72,10 +72,10 @@ public class StringParserTest {
 //	}
 	
 	@Test
-	public void stringParserShouldCreateEquationWithTwoSteps(){
-		StringParser parser = new StringParser("9*(4/(5-3))");
+	public void stringParserShouldCreateEquationWithMultipleSteps(){
+		StringParser parser = new StringParser("(3+(2-3))*5");
 		
-		EqNumber expectedResult = new EqNumber("18");
+		EqNumber expectedResult = new EqNumber("10");
 		
 		EquationVector eqVec = parser.createEquationVector();
 		

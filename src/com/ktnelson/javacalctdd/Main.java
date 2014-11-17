@@ -5,7 +5,8 @@ import com.ktnelson.javacalctdd.test.*;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		CalcApplication app = new CalcApplication();
+		app.run();
 	}
 
 
