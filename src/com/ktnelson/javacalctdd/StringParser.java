@@ -14,20 +14,24 @@ public class StringParser {
 		
 		//lhs and operator
 		for (int i = 0; i < input.length(); i++){
-			
-			if(!isOperator(input.charAt(i))){
+			char toCheck = input.charAt(i);
+			if(isNum(toCheck)){
 				potentialLhs += input.charAt(i);
 			}else {
-				lhs = new EqNumber(potentialLhs);
-				op = setOperator(input.charAt(i));
-				rhsStart = i+1;
+				if(isOperator(toCheck))
+				{
+					lhs = new EqNumber(potentialLhs);
+					op = setOperator(toCheck);
+					rhsStart = i+1;
+				}
 			}
 		}
 		
 		//rhs
 		for(int i = rhsStart; i < input.length(); i++){
-			if(!isOperator(input.charAt(i))){
-				potentialRhs += input.charAt(i);
+			char toCheck = input.charAt(i);
+			if(isNum(toCheck)){
+				potentialRhs += toCheck;
 			}
 		}
 		if(rhs == null){
@@ -35,6 +39,20 @@ public class StringParser {
 		}
 		
 		return new EquationStep(lhs, op, rhs);
+	}
+	
+	private boolean isNum(char c){
+		if(!isSpace(c) && !isOperator(c)){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isSpace(char c){
+		if(c == ' '){
+			return true;
+		}
+		return false;
 	}
 	
 	private boolean isOperator(char c){
