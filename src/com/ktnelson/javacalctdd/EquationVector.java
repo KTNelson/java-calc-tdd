@@ -28,4 +28,8 @@ public class EquationVector {
 		return finalResult;
 	}
 	
+	public int getSize(){
+		return equationVector.size();
+	}
+	
 }

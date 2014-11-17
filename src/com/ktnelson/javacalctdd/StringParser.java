@@ -1,6 +1,25 @@
 package com.ktnelson.javacalctdd;
 
 public class StringParser {
+	
+	private String m_input;
+	private EquationVector eqVec;
+	
+	public StringParser(String in){
+		m_input = in;
+	}
+	
+	public EquationVector createEquationVector(){
+		eqVec = new EquationVector();
+		
+		while(inputContainsBrackets())
+		{
+			eqVec.addEquation(readStep(m_input));
+		}
+		
+		eqVec.addEquation(readStep(m_input));
+		return eqVec;
+	}
 		
 	public EquationStep readStep(String input){
 		
@@ -26,6 +45,9 @@ public class StringParser {
 					rhsStart = i+1;
 					break;
 				}
+				else if(isOpeningBracket(toCheck)){
+					continue;
+				}
 			}
 		}
 		
@@ -36,21 +58,25 @@ public class StringParser {
 				potentialRhs += toCheck;
 			}
 			else if(isOpeningBracket(toCheck)){
-				return readStep(input.substring(i+1));
+				return readStep(input.substring(i));
 			}
 			else if(isClosingBracket(toCheck)){
 				break;
+			}
+			else if(isEquationReference(toCheck)){
+				rhs = eqVec.getEquationResultAt(eqVec.getSize() - 1);
 			}
 		}
 		if(rhs == null){
 			rhs = new EqNumber(potentialRhs);
 		}
 		
+		removeStringSection(m_input, m_input.indexOf(input), input.length());
 		return new EquationStep(lhs, op, rhs);
 	}
 	
 	private boolean isNum(char c){
-		if(!isSpace(c) && !isOperator(c) && !isOpeningBracket(c) && !isClosingBracket(c)){
+		if(!isSpace(c) && !isOperator(c) && !isOpeningBracket(c) && !isClosingBracket(c) && !isEquationReference(c)){
 			return true;
 		}
 		return false;
@@ -83,6 +109,20 @@ public class StringParser {
 		return false;
 	}
 	
+	private boolean isEquationReference(char c){
+		if(c == '!'){
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean inputContainsBrackets(){
+		if(m_input.contains("(") || m_input.contains(")")){
+			return true;
+		}
+		return false;
+	}
+	
 	private EquationStep.eOperator setOperator(char op){
 		EquationStep.eOperator newOp = null;
 		switch(op)
@@ -96,5 +136,9 @@ public class StringParser {
 		case '*': newOp = EquationStep.eOperator.eOperator_Multiply;
 		}
 		return newOp;
+	}
+	
+	private void removeStringSection(String inputCopy, int startPos, int length){
+		m_input = inputCopy.substring(0, startPos) + "!" + Integer.toString(eqVec.getSize()) +inputCopy.substring(startPos + length);
 	}
 }

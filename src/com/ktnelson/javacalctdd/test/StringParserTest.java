@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import com.ktnelson.javacalctdd.EqNumber;
 import com.ktnelson.javacalctdd.EquationStep;
+import com.ktnelson.javacalctdd.EquationVector;
 import com.ktnelson.javacalctdd.StringParser;
 
 import static org.junit.Assert.*;
@@ -59,17 +60,26 @@ public class StringParserTest {
 //		assertEquals("control and test should be equal at 8", controlStepResult.getValue(), testStepResult.getValue());
 //	}
 	
+//	@Test
+//	public void stringParserShouldCreateEquationVector(){
+//		StringParser parser = new StringParser();
+//		
+//		EqNumber expectedResult = new EqNumber("8");
+//		
+//		EquationVector eqVec = parser.createEquationVector("5 + 3");
+//		
+//		assertEquals("control and test should be equal at 8", expectedResult.getValue(), eqVec.equate().getValue());
+//	}
+	
 	@Test
-	public void stringParserShouldUnderstandBracketRules(){
-		StringParser parser = new StringParser();
+	public void stringParserShouldCreateEquationWithTwoSteps(){
+		StringParser parser = new StringParser("9*(4/(5-3))");
 		
-		EqNumber expectedResult = new EqNumber("16");
+		EqNumber expectedResult = new EqNumber("18");
 		
-		EquationStep testStep = parser.readStep("8 + (5 + 3)");
-		testStep.execute();
-		EqNumber testStepResult = testStep.getResult();
+		EquationVector eqVec = parser.createEquationVector();
 		
-		assertEquals("control and test should be equal at 8", expectedResult.getValue(), testStepResult.getValue());
+		assertEquals("control and test should be equal at 18", expectedResult.getValue(), eqVec.equate().getValue());
 	}
 	
 
